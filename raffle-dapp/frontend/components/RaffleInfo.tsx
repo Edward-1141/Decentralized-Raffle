@@ -55,7 +55,9 @@ export function RaffleInfo({ raffleData, isConnecting, isConnected, address }: R
         <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
           <div className="text-sm text-gray-500 dark:text-gray-400">Recent Winner</div>
           <div className="text-xl font-semibold font-mono">
-            {raffleData.recentWinner ? formatAddress(raffleData.recentWinner) : "None yet"}
+            {/* {raffleData.recentWinner ? formatAddress(raffleData.recentWinner) : "None yet"} */}
+            {raffleData.recentWinner ? 
+                raffleData.recentWinner === address ? "You are the winner!" : formatAddress(raffleData.recentWinner) : "None yet"}
           </div>
         </div>
 

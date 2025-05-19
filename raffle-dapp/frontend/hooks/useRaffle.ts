@@ -33,13 +33,13 @@ export function useRaffle() {
   const { data: entryFee, error: entryFeeError, refetch: refetchEntryFee } = useReadContract({
     address: RAFFLE_ADDRESS,
     abi: raffleABI,
-    functionName: "ENTRY_FEE",
+    functionName: "entryFee",
   });
 
   const { data: maxParticipants, error: maxParticipantsError, refetch: refetchMaxParticipants } = useReadContract({
     address: RAFFLE_ADDRESS,
     abi: raffleABI,
-    functionName: "MAX_PARTICIPANTS",
+    functionName: "maxParticipants",
   });
 
   const { writeContract, data: hash, isPending, isError, error } = useWriteContract();
@@ -54,8 +54,11 @@ export function useRaffle() {
       refetchParticipants();
       refetchWinner();
       refetchPrizePool();
+      refetchMaxParticipants();
+      refetchEntryFee();
+      refetchLastPrizePool();
     }
-  }, [isSuccess, refetchParticipants, refetchWinner, refetchPrizePool]);
+  }, [isSuccess, refetchParticipants, refetchWinner, refetchPrizePool, refetchLastPrizePool, refetchMaxParticipants, refetchEntryFee]);
 
   const enterRaffle = useCallback(() => {
     if (!entryFee) {
@@ -89,6 +92,14 @@ export function useRaffle() {
     maxParticipantsError,
   };
 
+  const refetchAllData = () => {
+    refetchParticipants();
+    refetchWinner();
+    refetchPrizePool();
+    refetchMaxParticipants();
+    refetchEntryFee();
+  }
+
   return {
     raffleData,
     errors,
@@ -98,5 +109,6 @@ export function useRaffle() {
     isSuccess,
     isError,
     error,
+    refetchAllData,
   };
 } 
