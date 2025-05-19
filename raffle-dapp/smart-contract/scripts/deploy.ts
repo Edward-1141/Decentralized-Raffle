@@ -1,5 +1,8 @@
 import hre from "hardhat";
 import { parseEther } from "ethers";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function main() {
   // Get owner address from command line arguments
@@ -19,6 +22,8 @@ async function main() {
   }
 
   console.log("Deploying contracts with owner address:", ownerAddress);
+  console.log("Entry fee:", entryFee.toString(), "wei", entryFeeString, "ETH");
+  console.log("Max participants:", maxParticipants);
 
   const raffle = await hre.ethers.deployContract("SimpleRaffle", [ownerAddress, entryFee, maxParticipants]);
   await raffle.waitForDeployment();
