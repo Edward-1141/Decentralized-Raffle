@@ -26,7 +26,7 @@ export function UserBalance({ address, refreshTrigger }: UserBalanceProps) {
         {isLoading ? (
           <span className="animate-pulse">Loading...</span>
         ) : (
-          `${Number(balance?.formatted || 0).toFixed(4)} ${balance?.symbol}`
+          `${Number(balance?.formatted || 0).toFixed(6)} ${balance?.symbol}`
         )}
       </div>
     </div>
