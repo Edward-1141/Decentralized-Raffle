@@ -7,7 +7,7 @@ import { useRaffle } from "../hooks/useRaffle";
 import { RaffleInfo } from "../components/RaffleInfo";
 import { UserBalance } from "../components/UserBalance";
 import { Congratulations } from "../components/Congratulations";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 function formatEther(value: bigint) {
   return Number(value) / 10 ** 18;
@@ -31,7 +31,7 @@ export default function Home() {
     address.toLowerCase() === raffleData.recentWinner.toLowerCase();
 
   // Refresh balance after successful transaction
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccess) {
       setBalanceRefreshTrigger(prev => prev + 1);
     }
