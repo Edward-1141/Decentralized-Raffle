@@ -20,7 +20,7 @@ describe("SimpleRaffle", function () {
 
     // Deploy contract
     const SimpleRaffle = await ethers.getContractFactory("SimpleRaffle");
-    raffle = await SimpleRaffle.deploy(owner.address);
+    raffle = await SimpleRaffle.deploy(owner.address, ENTRY_FEE, MAX_PARTICIPANTS);
   });
 
   describe("Deployment", function () {
@@ -29,11 +29,11 @@ describe("SimpleRaffle", function () {
     });
 
     it("Should have correct entry fee", async function () {
-      expect(await raffle.ENTRY_FEE()).to.equal(ENTRY_FEE);
+      expect(await raffle.entryFee()).to.equal(ENTRY_FEE);
     });
 
     it("Should have correct max participants", async function () {
-      expect(await raffle.MAX_PARTICIPANTS()).to.equal(MAX_PARTICIPANTS);
+      expect(await raffle.maxParticipants()).to.equal(MAX_PARTICIPANTS);
     });
   });
 
